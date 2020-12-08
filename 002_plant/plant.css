@@ -1,0 +1,340 @@
+/* 搜尋欄 */
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.header{
+    width: 100%;
+    display: flex;
+    position: fixed;
+    background-color: white;
+    z-index: 10;
+}
+.header .logo img{
+    display: inline-block;
+    padding:20px;
+    margin:auto;
+}
+.header .nav_text{  
+    width: 100%;       
+    text-align: left;
+    display: flex;
+}
+.header .nav_text a{
+    display: inline-block;
+    line-height:40px ;
+    text-decoration: none;
+    color: black;
+    padding: 30px ;
+}
+.header .nav_text a:hover{
+    color:green;
+}
+
+.header .nav_img{
+    width: 100%;
+    text-align: right;
+
+}
+.header .nav_img a{
+    display: inline-block;
+    padding:30px 10px ;
+    line-height:40px ;
+    
+}
+.header .item{
+    position: relative;
+    margin:10px;
+}
+.header .item .newTAG{
+    position: absolute;
+    top: 20px;
+    left:60px;
+    background-color:rgb(89, 186, 224);
+    font-weight: 500;
+    font-size: 10px;
+    color:white;
+    display: block;
+    width: 40px;
+    height: 15px;
+    line-height: 15px;
+    text-align: center;
+}
+.header .item {
+    position: relative;
+}
+.header .item .tra{
+    position: absolute;
+    width:0;
+    height: 0;
+    top:100%;
+    left:3px;
+    border-top: 3px solid rgb(89, 186, 224) ;
+    border-right: 3px solid transparent ;
+    /* border-left: 3px solid transparent ; */
+}
+ 
+
+
+/* 地一塊 */
+.intro {
+   background-image: url("assets/asset\ 7.png");
+   padding: 100px;
+}
+.banner .wrap{
+    display: flex;
+}
+.banner .wrap .item{
+    width: 50%;
+    
+}
+.banner .wrap .txt{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    padding: 10px 100px;      
+    box-sizing: border-box;
+    
+}
+.intro .wrap .txt h2{
+    font-size: 50px;
+    padding-bottom:10px ;
+}
+
+.intro .wrap .txt p{
+    font-size: 25px;
+    padding-bottom:10px ;
+}
+.banner .wrap .txt a{
+    display: inline-block;
+    text-align: center;
+    width: 150px;
+    padding: 10px;
+    /* width: 20%; */
+    /* height:10%; */
+    font-size: 20px;
+    text-decoration: none;
+            
+}
+.intro .wrap .txt a{
+    color: white;
+    background-color: black;
+    border-radius: 5px;  
+}
+.banner .wrap img{
+    width: 100%;
+    vertical-align: left;         
+}
+/* 第四塊 */
+.withVedio{
+    background-image: url("./assets/asset\ 43.png");
+
+}
+.withVedio .wrap .txt h2{
+    font-size: 30px;
+    color: green;
+    padding: 10px 0px;
+}
+.withVedio .wrap .txt p{
+    font-size: 20px;
+    padding: 10px 0px;
+    width: 500px;;
+}
+
+.withVedio .wrap .txt a{
+    padding: 10px 0px;
+    color:black;
+    border:1px solid black;
+}
+
+.withVedio .vedio{
+    margin:20px 0;
+    /* padding:40px !important; */
+    /* z-index: 3; */
+}
+.abc{
+    padding: 20px;
+}
+
+
+/* 底二塊 */
+.about{
+    padding: 50px 0;
+    
+}
+.about .container{
+    
+}
+.about .container .main-title{
+    text-align: center;
+}
+.about .container .main-title h2{
+    font-size: 35px;
+    color:green;
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.about .container .main-title p{
+    color:gray;
+    width: 980px;
+    padding: 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.about .container .content{
+    display: flex;
+    justify-content: space-around;
+    padding: 30px 0;
+}
+.about .container .content .content-item{
+    width: 370px;
+    /* margin: 15px; */
+}
+.about .container .content .pic img{
+    width: 100%;
+}
+.about .container .pic+.txt{
+    order:-1;
+    text-align: right;
+}
+.about .container .content .txt h3{
+    font-size: 25px;
+    font-weight: 300;
+}
+.about .container .content .txt .content-item-get{
+    margin-top: 10px;
+    margin-bottom:50px;
+}
+/* 第三塊 */
+.product{
+    width: 100%;
+    /* margin-left:auto;
+    margin-right: auto;  */
+    margin-bottom: 40px;
+}
+.product .container{}    
+
+.product .container .main-title{
+    text-align: center;
+}
+.product .container .main-title h2{
+    font-size: 50px;
+    padding-bottom: 50px;
+    color:green;
+}
+.product .container .group-list {
+    display: flex;   
+    justify-content: space-around;
+}
+.product .container .group-list .list-item{        
+    /* margin: 25px;  */
+    text-align: center;
+    position: relative;
+    
+}
+.product .container .group-list .list-item img{
+    opacity: 1;
+    transition: .5s;
+}
+.product .container .group-list .list-item img:hover{
+    opacity: 0.5;
+}
+.product .container .group-list .list-item h3{ 
+    font-size: 20px;
+    padding: 10px 0px;
+}
+.product .container .group-list .list-item strong{
+    font-weight: 600;
+    font-size: 20px;
+}
+.product  .list-item  .soldOut{
+    position: absolute;
+    background-color: green;
+    left: 0;
+    top:30px;
+    width:100px;
+    height: 30px;
+    color:white;
+    line-height: 30px;
+}
+.product  .list-item  .soldTag{
+    position: absolute;
+    background-color: green;
+    right: 0;
+    top:0;
+    width:60px;
+    height: 40px;
+    color:white;
+    border-radius: 50px 0;
+    line-height: 40px;
+}
+
+/* 第五塊 */
+.service{
+    margin-bottom: 50px;
+}
+.service .container{
+    text-align: center;
+    
+}
+.service .container .main-title{
+    font-size: 40px;
+    margin-top: 60px;
+}
+.service .container .main-title h2{
+    font-size: 30px;
+    padding: 30px 0px 40px;
+    font-weight: 600;
+}
+.service .container .group-list{
+    display: flex;
+    justify-content: space-around;
+}
+.service .container .group-list .list-item img{
+    opacity: 1;
+    transition: .5s;
+}
+.service .container .group-list .list-item img:hover{
+    opacity: 0.5;
+}
+/* 底下區塊 */
+.footer{
+    text-align: center;
+    background-color: rgb(236, 233, 233);
+    width: 100%;
+    height: 300px;
+}
+.footer .logo{
+    padding:20px;
+    margin:auto;
+}
+.footer .path{
+    display: flex;
+    justify-content: center;
+}
+.footer .path li{
+    padding:20px 8px 20px;
+    
+}
+.footer .path li a{
+    text-decoration: none;
+    color:black;
+    
+}
+
+.footer .picGroup a{
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    background-color:black;
+    color:white;
+    border-radius: 50%;
+    line-height: 40px;
+    margin:10px 20px 30px;
+    opacity: 1;
+    transition: .5;
+}
+.footer .picGroup a:hover{
+    background-color: green;
+}
