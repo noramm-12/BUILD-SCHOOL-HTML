@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wrap{
+            width: 900px;
+        }
+        .item{
+            width: 300px;
+            position: relative;
+            
+        }
+        .item img{
+            width: 100%;
+            height: 100%;
+            vertical-align:bottom;
+        }
+        .item .txt{
+            position: absolute;
+            bottom: 0;
+            left:0;
+            width: 100%;
+            height: 20%;
+             /* overflow: hidden; */
+            background-color: rgba(60, 60, 60, 0.445) ;
+            padding:0px 10px;
+            box-sizing: border-box;
+
+        }
+        .item .txt p{
+            opacity: 0;
+        }
+
+        .item .txt:hover {
+            height: 60%;
+        }
+        .item .txt:hover p{
+            opacity: 1;
+        }
+
+      
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="item">
+            <img src="https://picsum.photos/300/300/?random=1">
+            <div class="txt">
+                <h2>title</h2>
+                <p>Lorem ipsum dolor sit amet consectetu mollitia nemo consequuntur, dolorem, eos impedit repellendus dolore ipsam maxime ullam corporis, tempore modi fugit quaerat voluptatibus repudiandae accusamus.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
