@@ -1,0 +1,66 @@
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+/* :root{
+    --image-url:url("190911-21005-01-bIL1w.jpg")
+} */
+
+/* // 置中 */
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+h1 {
+    color: red;
+}
+#picture-wrap {
+    width: 600px; height: 600px;
+    border: solid 10px blue;
+    padding: 0px;
+}
+.picCell {
+width:118px;height:118px ;
+   border-top: solid 1px white;
+   border-left: solid 1px white;
+   border-right: solid 1px gray;
+   border-bottom: solid 1px gray;
+   float: left;
+   overflow: hidden;
+}
+button{
+    padding: 5px;
+    margin: 10px 30px 10px;
+}
+
+#choose{
+    align-self: center;
+}
+
+.hard-list{
+    display: flex;
+    justify-content:center;    
+}
+
+.wrap-outer{
+    display: flex;
+}
+/* .move-wrap{
+    display: flex;
+} */
+
+.moveTimes-answer{
+    display: block;
+    background-color: aquamarine;
+    width: 80px;
+    height: 80px;
+    font-size: 40px;
+    text-align: center;
+    line-height: 70px;
+}
+
+

@@ -1,0 +1,246 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style type="text/css">
+		*{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		.wrap{
+			width: 960px;
+			margin: auto;
+		}
+		.group{
+			padding: 40px 0;
+		}
+		.group .main-title{
+			width: 33.333333%;
+			color: #fff;
+			position: relative;
+			z-index: 2;
+		}
+		.group:nth-child(even) .main-title{
+			margin-left: auto;
+		}
+		.group .main-title h2{
+			background-color: #f00;
+			font-size: 40px;
+		}
+		.group .main-title .txt{
+			background-color: #000;
+			padding: 10px;
+			position: absolute;
+		}
+		.group .main-title h3{}
+		.group .main-title p{}
+
+
+		.group .mv{
+			width: 70%;
+			display: flex;
+			flex-wrap: wrap;
+			align-items: center;
+			margin-left: 20%;
+			position: relative;
+			/*outline: 2px solid red;*/
+		}
+		.group:nth-child(even) .mv{
+			margin-left: 10%;
+			flex-direction: row-reverse;
+		}
+		.group .mv:before{
+			content: "";
+			position: absolute;
+			display: block;
+			width: 30%;
+			height: 30%;
+			position: absolute;
+			background-color: #ccc;
+			top: -40px;
+			right: -40px;
+		}
+		.group:nth-child(even) .mv:before{
+			left: -40px;
+		}
+		.group .mv .pic{
+			width: 100%;
+			margin-right: -50px;
+			position: relative;
+			z-index: 1;
+		}
+		.group:nth-child(even) .pic{
+			margin-right: 0;
+			margin-left: -50px;
+		}
+		.group .mv .pic img{
+			width: 100%;
+			vertical-align: top;
+		}
+		.group .mv .icon{
+			width: 50px;
+			height: 30px;
+			background-color: #f00;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			position: relative;
+			z-index: 1;
+			right: -10px;
+		}
+		.group:nth-child(even) .icon{
+			left: -10px;
+		}
+		.group .mv .icon:before{
+			content: '';
+			display: block;
+			width: 0;
+			height: 0;
+			border-left: 20px solid #fff;
+			border-top: 10px solid transparent;
+			border-bottom: 10px solid transparent;
+		}
+
+
+		.group .main-txt{
+			width: 70%;
+			padding: 1em;
+			padding-left: 2em;
+			text-indent: -1.3em;
+			box-sizing: border-box;
+			background-color: #ddd;
+			margin-left: 5%;
+			margin-top: -20px;
+			position: relative;
+			z-index: 2;
+			display: flex;
+			flex-direction: column;
+		}
+		.group:nth-child(even) .main-txt{
+			margin-left: 25%;
+		}
+		.group .main-txt p:before{
+			content:'';
+			display: inline-block;
+			width: 5px;
+			height: 5px;
+			background: red;
+			vertical-align: middle;
+			margin: 0 8px;
+		}
+		.group .main-txt .slg{
+			color: red;
+			order: -1;
+			display: flex;
+			align-items: center;
+		}
+		.group .main-txt .slg:after{
+			content: '';
+			display: inline-block;
+			width: 10px;
+			height: 1px;
+			background-color: #f00;
+			flex-grow: 1;
+			margin-left: 1em;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div class="group">
+			<div class="main-title">
+				<h2>
+					<span>01</span>
+					操控樂趣
+				</h2>
+				<div class="txt">
+					<h3>人人買衣的駕駛體驗</h3>
+					<p>透過最佳重量分配，實現平順起步、直線穩定加速，過彎同時保持車身平穩，帶給駕駛更靈敏的道路反饋， 享受隨心馳騁的行駛快感。</p>
+				</div>
+			</div>
+			<div class="mv">
+				<div class="pic">
+					<img src="./pic/1.png" alt="圖片說明">
+				</div>
+				<div class="icon"></div>
+			</div>
+			<div class="main-txt">
+				<h3>低重心設計</h3>
+				<p>透過低重心設計，不僅呈現更低伏的外觀， 更能減少車身側傾，保持高速行駛穩定性</p>
+                <h3>車體剛性強化</h3>
+                <p>車身結構採用超高強度鋼材，提高車輛穩定性，同時藉由雷射強化焊接技術，大幅增加焊點數量，提升車身抗扭剛性，強化駕駛穩定性及安全性。</p>
+                <h3>四輪獨立懸吊</h3>
+                <p>搭載全新四輪獨立懸吊設定，透過懸吊的高乘載強度，保持輪胎抓地力，同時兼顧轉向靈敏與清晰路感回饋，提升駕駛樂趣。</p>
+				<div class="slg">
+					因為我們做了這些事情
+                </div>
+			</div>
+		</div>
+		<div class="group">
+			<div class="main-title">
+				<h2>
+					<span>02</span>
+					安全守護
+				</h2>
+				<div class="txt">
+					<h3>行車更安心的高剛性車體</h3>
+                    <p>您的愛車會妥善保護您，強悍穩固的車身可使您安全無虞。世界級的安全功能能讓您輕鬆自如享受旅程、毫無後顧之憂。</p>
+				</div>
+			</div>
+			<div class="mv">
+				<div class="pic">
+					<img src="./pic/advantage-2-video-button-bg.png" alt="圖片說明">
+				</div>
+				<div class="icon"></div>
+			</div>
+			<div class="main-txt">
+				<h3>低重心設計</h3>
+				<p>透過低重心設計，不僅呈現更低伏的外觀， 更能減少車身側傾，保持高速行駛穩定性</p>
+                <h3>車體剛性強化</h3>
+                <p>車身結構採用超高強度鋼材，提高車輛穩定性，同時藉由雷射強化焊接技術，大幅增加焊點數量，提升車身抗扭剛性，強化駕駛穩定性及安全性。</p>
+                <h3>四輪獨立懸吊</h3>
+                <p>搭載全新四輪獨立懸吊設定，透過懸吊的高乘載強度，保持輪胎抓地力，同時兼顧轉向靈敏與清晰路感回饋，提升駕駛樂趣。</p>
+				<div class="slg">
+					因為我們做了這些事情
+                </div>
+			</div>
+		</div>
+		<div class="group">
+			<div class="main-title">
+				<h2>
+					<span>03</span>
+					乘坐舒適
+				</h2>
+				<div class="txt">
+					<h3>令人放鬆舒適的車室空間</h3>
+                    <p>車室空間設計著重人體工學，透過方向盤、踏板等位置優化，追求更舒適的駕駛位置，並以新型座椅設計，提高座椅包覆性，致力實現長途駕駛不疲勞的舒適駕駛體驗。</p>
+				</div>
+			</div>
+			<div class="mv">
+				<div class="pic">
+					<img src="./pic/advantage-3-video-button-bg.png" alt="圖片說明">
+				</div>
+				<div class="icon"></div>
+			</div>
+			<div class="main-txt">
+				<h3>低重心設計</h3>
+				<p>透過低重心設計，不僅呈現更低伏的外觀， 更能減少車身側傾，保持高速行駛穩定性</p>
+                <h3>車體剛性強化</h3>
+                <p>車身結構採用超高強度鋼材，提高車輛穩定性，同時藉由雷射強化焊接技術，大幅增加焊點數量，提升車身抗扭剛性，強化駕駛穩定性及安全性。</p>
+                <h3>四輪獨立懸吊</h3>
+                <p>搭載全新四輪獨立懸吊設定，透過懸吊的高乘載強度，保持輪胎抓地力，同時兼顧轉向靈敏與清晰路感回饋，提升駕駛樂趣。</p>
+				<div class="slg">
+					因為我們做了這些事情
+                </div>
+			</div>
+		</div>
+	
+
+
+
+</body>
+</html>

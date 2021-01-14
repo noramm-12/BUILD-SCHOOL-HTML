@@ -1,0 +1,80 @@
+function GetCookie(name) {
+  var arg = name + "=";
+  var alen = arg.length;
+  var clen = document.cookie.length;
+  var i = 0;
+  while (i < clen) {
+    var j = i + alen;
+    if (document.cookie.substring(i, j) == arg)
+      return getCookieVal(j);
+    i = document.cookie.indexOf(" ", i) + 1;
+    if (i == 0) break;
+  }
+  return null;
+}
+
+function SetCookie(name, value) {
+  var CookieDate = new Date;
+  CookieDate.setFullYear(CookieDate.getFullYear() + 10);
+  var argv = SetCookie.arguments;
+  var argc = SetCookie.arguments.length;
+  var expires = CookieDate;
+  var path = "/";
+  var domain = (argc > 4) ? argv[4] : null;
+  var secure = (argc > 5) ? argv[5] : false;
+  document.cookie = name + "=" + escape(value) +
+    ((expires == null) ? "" : ("; expires=" + expires.toGMTString())) +
+    ((path == null) ? "" : ("; path=" + path)) +
+    ((domain == null) ? "" : ("; domain=" + domain)) +
+    ((secure == true) ? "; secure" : "");
+}
+
+function setCookieId(cookieName, myCookieId) {
+  var actCookieId = GetCookie(cookieName)
+  if (actCookieId == null) {
+    SetCookie(cookieName, myCookieId)
+    actCookieId = myCookieId
+  }
+  return actCookieId
+}
+
+function getCookieVal(offset) {
+  var endstr = document.cookie.indexOf(";", offset);
+  if (endstr == -1)
+    endstr = document.cookie.length;
+  return unescape(document.cookie.substring(offset, endstr));
+}
+
+function genCookieId() {
+  var base = 36,
+    pattern = new String('0000000000');
+  randomValue = new String(pattern + Math.floor(Math.random() * Math.pow(base, pattern.length)).toString(base));
+
+  var date = new Date();
+  tmpTimeString = date.getFullYear().toString() + pad2(date.getMonth() + 1) + pad2(date.getDate()) + pad2(date.getHours()) + pad2(date.getMinutes()) + pad2(date.getSeconds());
+  return tmpTimeString + randomValue.substr(randomValue.length - pattern.length).toUpperCase();
+}
+
+function pad2(n) {
+  return n < 10 ? '0' + n : n
+}
+
+new Fingerprint2().get(function (result, components) {
+  console.log(result) // a hash, representing your device fingerprint
+  console.log(components) // an array of FP components
+
+  var actCookieId = genCookieId();
+  actCookieId = setCookieId('ToyotaCookieId', actCookieId);
+  SetCookie('ToyotaCanvas', result);
+
+  // toyota web log
+  (function() {
+      var xhr = new XMLHttpRequest();
+      xhr.timeout = 1500;
+    xhr.open('POST', '/api/canvas_cookie.ashx', true);
+    xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    xhr.send('canvasid=' + result + '&cookieid=' + actCookieId);
+  })();
+  // gtm event
+  dataLayer.push({ 'event': 'maxnerva.getFingerprint' });
+})

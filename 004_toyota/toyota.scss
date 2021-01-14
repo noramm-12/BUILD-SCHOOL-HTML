@@ -1,0 +1,114 @@
+// general
+*{
+    margin:0;
+    padding: 0;
+    list-style: none;
+}
+
+.wrap{
+    width: 960px;
+    margin:auto;
+}
+.group{
+    position: relative;
+}
+
+//1.main-title
+.main-title{
+    width: 33.3%;
+    color:white;
+    position: relative;
+    margin-top: -5%;
+    h2{
+        background-color: #f00;
+        font-size: 40px;
+        padding: 10px;
+        
+        .rotate{
+            transform: rotate(50deg);//
+        }
+    }
+    .txt{
+        background-color: #000;
+        padding: 10px;
+        // position: absolute;
+    }
+}
+//偶數移位
+.group:nth-child(even) .main-title{
+    margin-left: auto;
+}
+// 2.mv
+.mv{
+    width: 70%;
+    display: flex;
+    margin-left: 20%;
+    margin-top: 10%;
+    align-items: center;
+    
+    .pic{
+        width: 100%;
+        // 右方空出50px
+        margin-right:-40px;
+        
+        img{
+            width: 100%;
+            vertical-align: top;
+        }
+    }
+    .icon{
+        width: 50px;
+        height: 30px;
+        background-color: #f00;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        // 偏移
+        position: relative;
+        &:before{
+            content:'';
+            display: block;
+            height: 0;
+            width: 0;
+            border-left: 20px solid #fff;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+        }
+    }
+}
+// 3.main-txt
+.main-txt{
+    width: 60%;
+    background-color: #ddd;
+    padding:20px;
+    margin-left: 5%;
+    margin-top:-5%;
+    //偏移
+    position: relative;
+    z-index: 2;
+    h3{
+        background-color: black;
+        display: inline;
+        color:white;
+        padding: 5px;
+        border-radius: 5%;
+    } 
+    p{
+        padding: 10px;
+        // text-indent: -1em;
+        &:before{
+            content:'';
+            display: inline-block;
+            height: 5px;
+            width: 5px;
+            border-radius: 50%;
+    
+            background-color: red;
+            vertical-align:middle;
+            margin:0px 8px;
+        }
+    }
+    
+}
+
+

@@ -1,0 +1,264 @@
+/* * {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wrap {
+  width: 960px;
+  margin: auto;
+}
+
+.group {
+  padding:40px 0
+}
+
+.main-title {
+  width: 33.3%;
+  color: white;
+  position: relative;
+}
+
+.main-title h2 {
+  background-color: #f00;
+  font-size: 40px;
+  padding: 10px;
+}
+
+.main-title h2 .rotate {
+  -webkit-transform: rotate(50deg);
+          transform: rotate(50deg);
+}
+
+.main-title .txt {
+  background-color: #000;
+  padding: 10px;
+}
+
+/* .group:nth-child(even) .main-title {
+  margin-left: auto;
+} 
+
+.mv {
+  width: 70%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin-left: 20%;
+  margin-top: 0%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.mv .pic {
+  width: 100%;
+  margin-right: -40px;
+}
+
+.mv .pic img {
+  width: 100%;
+  vertical-align: top;
+}
+
+.mv .icon {
+  width: 50px;
+  height: 30px;
+  background-color: #f00;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+}
+
+.mv .icon:before {
+  content: '';
+  display: block;
+  height: 0;
+  width: 0;
+  border-left: 20px solid #fff;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+}
+
+.main-txt {
+  width: 60%;
+  background-color: #ddd;
+  padding: 20px;
+  margin-left: 5%;
+  margin-top: -5%;
+  position: relative;
+  z-index: 2;
+}
+
+.main-txt h3 {
+  background-color: black;
+  display: inline;
+  color: white;
+  padding: 5px;
+  border-radius: 5%;
+}
+
+.main-txt p {
+  padding: 10px;
+}
+
+.main-txt p:before {
+  content: '';
+  display: inline-block;
+  height: 5px;
+  width: 5px;
+  border-radius: 50%;
+  background-color: red;
+  vertical-align: middle;
+  margin: 0px 8px;
+} */
+
+*{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.wrap{
+  width: 960px;
+  margin: auto;
+  outline: 1px solid #00f;
+}
+.group{
+  padding: 40px 0;
+}
+.group .main-title{
+  width: 33.333333%;
+  color: #fff;
+  position: relative;
+  z-index: 2;
+}
+.group:nth-child(even) .main-title{
+  margin-left: auto;
+}
+.group .main-title h2{
+  background-color: #f00;
+  font-size: 40px;
+}
+.group .main-title .txt{
+  background-color: #000;
+  padding: 10px;
+  position: absolute;
+}
+.group .main-title h3{}
+.group .main-title p{}
+
+
+.group .mv{
+  width: 70%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-left: 20%;
+  position: relative;
+  /*outline: 2px solid red;*/
+}
+.group:nth-child(even) .mv{
+  margin-left: 10%;
+  flex-direction: row-reverse;
+}
+.group .mv:before{
+  content: "";
+  position: absolute;
+  display: block;
+  width: 30%;
+  height: 30%;
+  position: absolute;
+  background-color: #ccc;
+  top: -40px;
+  right: -40px;
+}
+.group:nth-child(even) .mv:before{
+  left: -40px;
+}
+.group .mv .pic{
+  width: 100%;
+  margin-right: -50px;
+  position: relative;
+  z-index: 1;
+}
+.group:nth-child(even) .pic{
+  margin-right: 0;
+  margin-left: -50px;
+}
+.group .mv .pic img{
+  width: 100%;
+  vertical-align: top;
+}
+.group .mv .icon{
+  width: 50px;
+  height: 30px;
+  background-color: #f00;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+  right: -10px;
+}
+.group:nth-child(even) .icon{
+  left: -10px;
+}
+.group .mv .icon:before{
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 20px solid #fff;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+}
+
+
+.group .main-txt{
+  width: 70%;
+  padding: 1em;
+  padding-left: 2em;
+  text-indent: -1.3em;
+  box-sizing: border-box;
+  background-color: #ddd;
+  margin-left: 5%;
+  margin-top: -20px;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+}
+.group:nth-child(even) .main-txt{
+  margin-left: 25%;
+}
+.group .main-txt p:before{
+  content:'';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  background: red;
+  vertical-align: middle;
+  margin: 0 8px;
+}
+.group .main-txt .slg{
+  color: red;
+  order: -1;
+  display: flex;
+  align-items: center;
+}
+.group .main-txt .slg:after{
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 1px;
+  background-color: #f00;
+  flex-grow: 1;
+  margin-left: 1em;
+}
