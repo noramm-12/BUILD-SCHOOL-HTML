@@ -46,6 +46,7 @@
     </div>
 
     <script>
+        var IsStart = false;
         window.onload = () => {
 
 
@@ -53,18 +54,13 @@
                 messUp();
             })
             document.getElementById('start').addEventListener('click', function () {
-                // for (let i = 0; i < radioNum*radioNum ; i++) {
-                //     $("#pic"+i).remove();
-                // }
                 $('#picture-wrap').html('');
-                //puzzleGo();
-                // if(choose.chooseHard.value!=0)
-                // {answer.setAttribute("disabled", true);}
+                start.setAttribute("disabled", true);
                 radio_n();
                 createBox();
                 $('.picCell').click(clickOn);
                 times = 0;
-                moveTimes.innerText = times;
+                //moveTimes.innerText = times;
             })
         }
         //將位置轉成座標的換算表
@@ -81,13 +77,6 @@
                     radioNum = choose.chooseHard[i].value;
                     return radioNum;
                 }
-            // for (let i = 0; i < choose.eachChooseBtn.length; i++) {
-            //     if (choose.eachChooseBtn[i].checked) {
-            //         eachChooseBtnV = parseInt(choose.eachChooseBtn[i].value);
-            //         return eachChooseBtnV;
-
-            //     }
-            // }
         }
         //填入16張圖
         function createBox() {
@@ -163,19 +152,23 @@
                     break;
                 }
             }
-            // checkWin();
-            setTimeout(checkWin, 100);
+            if(IsStart){
+                setTimeout(checkWin,20);
+            }
         }
 
 
         function messUp() {
-            for (let i = 0; i < 1; i++) {
+            IsStart = false;
+            for (let i = 0; i < 400; i++) {
                 let picCells = $("#picture-wrap div");
                 //找出空格所在位置，並取得其相鄰圖塊
                 let blankSur = getNearPos(picCells.index($('#pic0')));
                 picCells.eq(blankSur[Math.floor(Math.random() * blankSur.length)]).click();
                 times = 0;
+                moveTimes.innerText = times;
             }
+            IsStart = true; 
         }
 
         function checkWin() {
@@ -186,7 +179,7 @@
                     a++;
                     if (a == 16) {      
                         times = 0;
-                        answer.removeAttribute('disabled');
+                        start.removeAttribute('disabled');
                         alert('win!');
                     }
                 } else {
