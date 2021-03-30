@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Simple Map</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC0Dqhy9GxLVZwlvGZdFEOOduLhGo8HCSo&callback=initMap&libraries=&v=weekly"
+        defer></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="./width.css">
+
+    <style type="text/css">
+        #map {
+            height: 100vh;
+            width: 100%;
+        }
+
+        /* Optional: Makes the sample page fill the window. */
+        body {
+            height: 100vh;
+            width: 100%;
+        }
+        h2{
+            padding: 20px 0;
+        }
+        .col-3{
+            background: #ebc8a6;
+        }
+        .selector {
+            height: 100vh;
+        }
+        .selector-wrap{
+            display: flex;
+            justify-content: space-evenly;
+            padding-bottom: 20px;
+        }
+
+        .selector-div {
+            overflow-y: scroll;
+            height: 80vh;
+        }
+        .mb-0{
+            display: flex;
+        }
+
+        .btn_sure {
+            position: relative;
+            display: inline-block;
+            padding: 0.25em 0.5em;
+            text-decoration: none;
+            color: #FFF;
+            background: #fd9535;
+            /*色*/
+            border-radius: 4px;
+            /*角の丸み*/
+            box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.2), inset 0 -2px 0 rgba(0, 0, 0, 0.05);
+            font-weight: bold;
+            border: solid 2px #d27d00;
+            /*線色*/
+        }
+
+        .btn_sure:active {
+            /*押したとき*/
+            box-shadow: 0 0 2px rgba(0, 0, 0, 0.30);
+        }
+
+        .custom-map-control-button {
+            appearance: button;
+            background-color: #fff;
+            border: 0;
+            border-radius: 2px;
+            box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            margin: 10px;
+            padding: 0 0.5em;
+            height: 40px;
+            font: 400 18px Roboto, Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .custom-map-control-button:hover {
+            background: #ebebeb;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js"
+        integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous">
+    </script>
+    <script src="select-city.js"></script>
+    <div class="container">
+        <div class="row">
+            <div class="col-3">
+                <div class="selector">
+                    <h2>台灣哪裡玩景點地圖</h2>
+                    <div class="selector-wrap">
+                        <label>請選擇區域 : <select class="county"></select></label>
+                        <button class="btn_sure">確定</button>
+                    </div>
+                    <div class="selector-div">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-9">
+                <div id="map"></div>
+            </div>
+        </div>
+    </div>
+
+    <template class="accordion cardMap" id="accordionExample">
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                    <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
+                        data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    </button>
+                    <a href="#" class="btn btn-primary">位置</a>
+                </h2>
+            </div>
+
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                <div class="card-body">
+                    VHS.
+                </div>
+            </div>
+    </template>
+
+    <script>
+        new TwCitySelector({
+            el: '.city-selector-set',
+            elCounty: '.county', // 在 el 裡查找 element
+            elDistrict: '.district', // 在 el 裡查找 element
+            elZipcode: '.zipcode' // 在 el 裡查找 element
+        });
+    </script>
+    <script>
+        let mapObject = [];
+        let mapObj = [];
+        let markers = [];
+        let country = document.querySelector('.county');
+        let btn_sure = document.querySelector('.btn_sure');
+        let card = document.querySelector(".cardMap");
+        var infoWindow;
+        var map;
+        var currentInfoWindow = ''; //Global variable
+        const jsonUrl = "https://bsopendata.azurewebsites.net/api/LeisureTravel/Attractions";
+
+        window.onload = function () {
+            getPokemonJSON();
+            btn_sure.addEventListener('click', function () {
+                deleteMarkers();
+                moveCard();
+                genMaker(mapObj);
+                document.querySelectorAll(".btn-primary").forEach(btn => {
+                    btn.addEventListener("click", function () {
+                        //e.preventDefault()
+                        mapPanTo(btn);
+                    })
+                })
+            })
+        }
+
+
+        function getPokemonJSON() {
+            let xhr = new XMLHttpRequest();
+            xhr.onload = function () {
+                mapObject = JSON.parse(this.responseText); //return to js
+                mapObj = mapObject.XML_Head.Infos.Info;
+            }
+            xhr.open("GET", jsonUrl);
+            xhr.send();
+        }
+
+
+        // Initialize and add the map
+        function initMap() {
+            // The location of Uluru
+            const myTag = {
+                lat: 23.344,
+                lng: 121.036
+            };
+            // The map, centered at Uluru
+            map = new google.maps.Map(document.getElementById("map"), {
+                zoom: 9,
+                center: myTag,
+            });
+            // The marker, positioned at Uluru
+            const markerInit = new google.maps.Marker({
+                position: myTag,
+                map: map,
+            });
+
+            infoWindow = new google.maps.InfoWindow();
+            const locationButton = document.createElement("button");
+            locationButton.textContent = "Pan to Current Location";
+            locationButton.classList.add("custom-map-control-button");
+            map.controls[google.maps.ControlPosition.TOP_CENTER].push(
+                locationButton
+            );
+            locationButton.addEventListener("click", () => {
+                // Try HTML5 geolocation.
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        (position) => {
+                            const pos = {
+                                lat: position.coords.latitude,
+                                lng: position.coords.longitude,
+                            };
+                            infoWindow.setPosition(pos);
+                            infoWindow.setContent("我在這!");
+                            infoWindow.open(map);
+                            map.setCenter(pos);
+                        },
+                        () => {
+                            handleLocationError(true, infoWindow, map.getCenter());
+                        }
+                    );
+                } else {
+                    // Browser doesn't support Geolocation
+                    handleLocationError(false, infoWindow, map.getCenter());
+                }
+            });
+        }
+
+        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+            infoWindow.setPosition(pos);
+            infoWindow.setContent(
+                browserHasGeolocation ?
+                "Error: The Geolocation service failed." :
+                "Error: Your browser doesn't support geolocation."
+            );
+            infoWindow.open(map);
+        }
+
+        // function genMakerr(results) {
+        //     for (let i = 0; i < results.length; i++) {
+        //         const coords = results[i];
+        //         const latLng = new google.maps.LatLng(coords.Py, coords.Px);
+        //         const marker2 = new google.maps.Marker({
+        //             position: latLng,
+        //             map: map,
+        //             //icon: image,
+        //         });
+        //     }
+        // }
+
+        // 放置多個marker
+        function genMaker(arrayi) {
+            let arrayI = arrayi.filter(e => e.Region == country.value);
+            for (let i = 0; i < arrayI.length; i++) {
+                //marker
+                let coords = arrayI[i];
+                let latLng = new google.maps.LatLng(coords.Py, coords.Px);
+                let marker = new google.maps.Marker({
+                    position: latLng,
+                    map: map,
+                    // icon: {
+                    //     path: google.maps.SymbolPath.CIRCLE,
+                    //     scale: 10
+                    // },
+                });
+                markers.push(marker);
+
+                // info window
+                let infoWindow = new google.maps.InfoWindow({
+                    content: `<h6>${coords.Name}</h6><p>地址:${coords.Add}</p><p>開放時間:${coords.Opentime}</p>` // 支援html
+                });
+
+                // 監聽 marker click 事件//addListener!=addEventListener
+                marker.addListener('click', () => {
+                    if (currentInfoWindow != '') {
+                        currentInfoWindow.close();
+                        currentInfoWindow = '';
+                    }
+                    // info window
+                    infoWindow = new google.maps.InfoWindow({
+                        content: `<h6>${coords.Name}</h6><p>地址:${coords.Add}</p><p>開放時間:${coords.Opentime}</p>` // 支援html
+                    });
+                    infoWindow.open(map, marker);
+                    currentInfoWindow = infoWindow;
+                });
+
+
+
+            }
+            genCard(arrayI);
+        }
+
+        function genCard(array) {
+            array.forEach((item, index) => {
+                let cloneContent = card.content.cloneNode(true);
+                cloneContent.querySelector('#collapseOne').setAttribute('id', item.Id);
+                cloneContent.querySelector('.btn-link').setAttribute('aria-controls', item.Id);
+                cloneContent.querySelector('.btn-link').setAttribute('data-target', `#${item.Id}`);
+                cloneContent.querySelector('.btn-link').innerHTML = item.Name;
+                cloneContent.querySelector('.btn-primary').innerText = "位置";
+                cloneContent.querySelector('.card-body').innerHTML =
+                    `<p>${item.Description}</p><p>地址:${item.Add}</p><p>電話:${item.Tel}</p><p>開放時間:${item.Opentime}</p>`;
+                cloneContent.querySelector('.btn-primary').setAttribute('data-px', item.Px);
+                cloneContent.querySelector('.btn-primary').setAttribute('data-py', item.Py);
+                //cloneContent.querySelector('.btn-primary').setAttribute('onclick',mapPanTo(this));
+                document.querySelector('.selector-div').appendChild(cloneContent);
+            })
+
+        }
+
+        function moveCard() {
+            document.querySelector('.selector-div').innerText = null;
+        }
+
+        // Sets the map on all markers in the array.//只是為了清除
+        function setMapOnAll(map) {
+            for (let i = 0; i < markers.length; i++) {
+                markers[i].setMap(map);
+            }
+        }
+
+        // Removes the markers from the map, but keeps them in the array.
+        function clearMarkers() {
+            setMapOnAll(null);
+        }
+
+        // Deletes all markers in the array by removing references to them.
+        function deleteMarkers() {
+            clearMarkers();
+            markers = [];
+        }
+
+        //讓地圖移動到指定位置
+        function mapPanTo(btn) {
+            let e = btn.dataset;
+            //console.log(e);
+            let searchCenter = {
+                lat: parseFloat(e.py),
+                lng: parseFloat(e.px)
+            };
+            map.setCenter(searchCenter);
+            map.panTo(searchCenter);
+            map.setZoom(18);
+        }
+    </script>
+
+</body>
+
+</html>
